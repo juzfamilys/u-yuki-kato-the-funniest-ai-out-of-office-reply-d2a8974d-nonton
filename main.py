@@ -23,6 +23,10 @@ def validate(text):
         raise ValueError("entry must be text")
     if text.strip() == "":
         raise ValueError("entry must not be blank or whitespace-only")
+    if text != text.strip():
+        raise ValueError("entry must not have leading or trailing whitespace")
+    if not any(char.isalpha() for char in text):
+        raise ValueError("entry must contain at least one letter")
     if "\n" in text or "\r" in text:
         raise ValueError("entry must be a single line")
     if not MIN_CHARS <= len(text) <= MAX_CHARS:
